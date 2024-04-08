@@ -1,21 +1,63 @@
-const baseUrl = window.location.href;
-const links = document.querySelectorAll('a:not([target="_blank"])');
+const baseUrl = window.location.origin;
 const contentPage = document.getElementById('content');
 
-for (const link of links) {
-    link.addEventListener('click', async function (event) {
-        event.preventDefault();
-        
-        const urlPage = link.getAttribute('href');
-        const response = await fetch(`${baseUrl}${urlPage}`);
-
-        if (!response.ok) return false;
-
-        const html = await response.text();
-        contentPage.innerHTML = html;
-
-        
-
-        return true;
-    });
+const routePages = {
+    '/about': 'pages/about.html',
+    '/mural': 'pages/mural/index.html',
+    '/mural/buzios': 'pages/mural/buzios.html',
+    '/mural/arraial': 'pages/mural/arraial.html',
+    '/mural/boa-esperanca': 'pages/mural/boa-esperanca.html',
+    '/mural/futevolei': 'pages/mural/futevolei.html',
+    '/mural/cam': 'pages/mural/cam.html',
+    '/mural/festa-fantasia': 'pages/mural/festa-fantasia.html',
 }
+
+const initPage = async () => {
+    const routeName = window.location.pathname;
+    return await resolveRoute(routeName);
+};
+
+const resolveRoute = async (routeName) => {
+    contentPage.innerHTML = `<p class="loading-page">Carregando...</p>`;
+
+    const urlPage = routePages[routeName] || routePages['/about'];
+    const response = await fetch(`${baseUrl}/${urlPage}`);
+
+    if (!response.ok) return false;
+
+    const html = await response.text();
+    contentPage.innerHTML = html;
+
+    const responseAsHtml = new DOMParser().parseFromString(html, 'text/html');
+    const pageScripts = responseAsHtml.querySelectorAll('input.page-script');
+
+    if(pageScripts.length) for (const inputScript of pageScripts) {
+        const scriptUrl = inputScript.value;
+        const script = document.createElement('script');
+        script.src = scriptUrl;
+        document.body.appendChild(script);
+    }
+
+    resolveEventLinks();
+
+    window.history.pushState(null, null, routeName);
+    return true;
+}
+
+const resolveEventLinks = () => {
+    const links = document.querySelectorAll('a:not([target="_blank"]):not(.tracked)');
+
+    for (const link of links) {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            const routeName = link.getAttribute('href');
+            return resolveRoute(routeName);
+        });
+
+        link.classList.add('tracked');
+    }
+}
+
+addEventListener("popstate", (e) => initPage());
+initPage();
