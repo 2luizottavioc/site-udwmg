@@ -1,0 +1,16 @@
+version: "1.0"
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        working_dir: /app
+        volumes:
+            - .:/app
+        # mem_limit: 128m
+        # mem_reservation: 128M
+        # cpus: 0.05
+        ports:
+            - "8080:80"

@@ -1,0 +1,61 @@
+.about-page {
+    margin-top: 32px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    
+    img {
+        max-width: 300px;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        box-shadow: 0px 8px 16px rgba(0, 117, 255, 0.1);
+    }
+
+    .name {
+        font-size: 1.6rem;
+        font-weight: bold;
+        color: #0075FF;
+    }
+
+    p {
+        max-width: 30vw;
+        font-size: 1rem;
+        font-weight: 500;
+        text-align: center;
+        color: #333;
+
+        b {
+            font-weight: 600;
+            color: #0075FF;
+        }
+    }
+
+    ul.links {
+        display: flex;
+        list-style: none;
+
+        li {
+            padding: 0px 8px;
+            border-right: 1px solid #333;
+
+            &:last-child {
+                border-right: none;
+            }
+
+            a {
+                font-size: 0.7rem;
+                font-weight: 500;
+                color: #333;
+                transition: color 0.2s;
+
+                &:hover {
+                    color: #0075FF;
+                }
+            }
+        }
+
+    }
+}
