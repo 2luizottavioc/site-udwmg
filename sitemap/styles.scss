@@ -87,6 +87,7 @@ a {
     min-height: 100svh;
     display: flex;
     flex-direction: column;
+    animation: fade-in 0.3s ease-in-out;
     
     .loading-page {
         width: 100%;

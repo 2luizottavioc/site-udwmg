@@ -2,6 +2,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    animation: fade-in 0.3s ease-in-out;
 
     .grid-images {
         display: grid;
@@ -40,6 +41,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: fade-in 0.3s ease-in-out;
 
     .image-mural-page-title {
         width: 100%;

@@ -79,6 +79,7 @@ a {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
+  animation: fade-in 0.3s ease-in-out;
 }
 #content .loading-page {
   width: 100%;
@@ -184,6 +185,7 @@ a {
   justify-content: center;
   align-items: center;
   gap: 32px;
+  animation: fade-in 0.3s ease-in-out;
 }
 .about-page img {
   max-width: 300px;
@@ -232,6 +234,7 @@ a {
   width: 100%;
   display: flex;
   justify-content: center;
+  animation: fade-in 0.3s ease-in-out;
 }
 .mural-page .grid-images {
   display: grid;
@@ -266,6 +269,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
+  animation: fade-in 0.3s ease-in-out;
 }
 .image-mural-page .image-mural-page-title {
   width: 100%;
